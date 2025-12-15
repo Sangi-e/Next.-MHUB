@@ -6,7 +6,7 @@ import { ArrowLeft, Copy, Share2, Gift, Users, ChevronRight, CheckCircle, Clock,
 export const ReferFriends: React.FC = () => {
   const navigate = useNavigate();
   const [copied, setCopied] = useState(false);
-  const referralCode = "NEXUS-8829";
+  const referralCode = "HANDY-8829";
 
   const handleCopy = () => {
     navigator.clipboard.writeText(referralCode);
@@ -110,7 +110,7 @@ export const ReferFriends: React.FC = () => {
                     </div>
                     <div>
                         <h4 className="font-bold text-sm text-slate-800">They Sign Up</h4>
-                        <p className="text-xs text-gray-500 mt-1">Friends create an account and verify their identity on Nexus.</p>
+                        <p className="text-xs text-gray-500 mt-1">Friends create an account and verify their identity on Handy.</p>
                     </div>
                 </div>
                  <div className="flex items-start relative z-10">

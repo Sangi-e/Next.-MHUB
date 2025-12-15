@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Trophy, Medal, MapPin, Globe, Filter, TrendingUp, Flame, Star, ChevronUp, ChevronDown, Award } from 'lucide-react';
 import { getLeaderboardData } from '../services/gamificationService';
@@ -27,8 +28,8 @@ export const Leaderboard: React.FC = () => {
           <div className="flex justify-between items-start">
             <div>
                <h3 className="font-bold text-sm uppercase tracking-wider text-white/80 flex items-center"><Flame size={14} className="mr-1 text-orange-300"/> Weekly Contest</h3>
-               <h2 className="text-xl font-bold mt-1">Top Responder ⚡</h2>
-               <p className="text-xs text-white/90 mt-1">Reply to 95% of messages under 1 hr to win!</p>
+               <h2 className="text-xl font-bold mt-1">Top Earner ⚡</h2>
+               <p className="text-xs text-white/90 mt-1">Highest revenue growth wins ₦50k bonus!</p>
             </div>
             <div className="text-right">
                <span className="block text-2xl font-bold">2d 14h</span>
@@ -130,6 +131,7 @@ export const Leaderboard: React.FC = () => {
                         <h4 className="font-bold text-sm text-slate-800 flex items-center">
                             {user.name}
                             {user.badges.includes('Top Rated') && <span className="ml-2 text-[8px] bg-yellow-100 text-yellow-800 px-1.5 py-0.5 rounded-full">TOP</span>}
+                            {user.badges.includes('High Earner') && <span className="ml-1 text-[8px] bg-green-100 text-green-800 px-1.5 py-0.5 rounded-full">$$$</span>}
                         </h4>
                         <div className="flex items-center text-xs text-gray-500 mt-0.5">
                             <span className="mr-2 text-indigo-600 font-medium">{user.level}</span>

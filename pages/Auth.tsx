@@ -1,14 +1,16 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Camera, ChevronRight, Loader2, Sparkles, ShieldCheck, ArrowLeft, Mail, Lock, Phone, Globe, TrendingUp, MapPin, Upload, User as UserIconSVG, Briefcase as BriefcaseIconSVG, CreditCard, AlertTriangle, FileText, CheckCircle, Smartphone, Eye, Image as ImageIcon, Facebook, Linkedin, Instagram, Navigation } from 'lucide-react';
+import { Camera, ChevronRight, Loader2, Sparkles, ShieldCheck, ArrowLeft, Mail, Lock, Phone, Globe, TrendingUp, MapPin, Upload, User as UserIconSVG, Briefcase as BriefcaseIconSVG, CreditCard, AlertTriangle, FileText, CheckCircle, Smartphone, Eye, Image as ImageIcon, Facebook, Linkedin, Instagram, Navigation, Handshake } from 'lucide-react';
 import { generateProfessionalBio } from '../services/geminiService';
+import { Logo } from '../components/Logo';
 
 export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) => {
   // States
   const [view, setView] = useState<'onboarding' | 'splash' | 'login' | 'register' | 'otp' | 'role' | 'verification' | 'welcome'>('onboarding');
   const [targetRole, setTargetRole] = useState<'customer' | 'entrepreneur' | 'admin' | null>(null);
   const [roleSelection, setRoleSelection] = useState<'customer' | 'entrepreneur' | null>(null);
-  const [loginRole, setLoginRole] = useState<'customer' | 'entrepreneur'>('customer');
+  const [loginRole, setLoginRole] = useState<'customer' | 'entrepreneur' | 'admin'>('customer');
   const [isLoading, setIsLoading] = useState(false);
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
   
@@ -73,7 +75,7 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
         const timer = setTimeout(() => {
             setRole(targetRole || 'customer');
             navigate(targetRole === 'admin' ? '/admin' : '/home');
-        }, 3000);
+        }, 5000); // Set to 5s
         return () => clearTimeout(timer);
     }
   }, [view, targetRole, setRole, navigate]);
@@ -136,8 +138,8 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
         icon: ShieldCheck,
         title: "Trust & Safety",
         desc: "All service providers are verified. Book with confidence knowing you're in safe hands.",
-        color: "text-blue-600",
-        bg: "bg-blue-50"
+        color: "text-emerald-600",
+        bg: "bg-emerald-50"
     },
     {
         id: 2,
@@ -152,8 +154,8 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
         icon: TrendingUp,
         title: "Grow Your Business",
         desc: "Showcase your skills, build your portfolio, and reach thousands of potential clients.",
-        color: "text-purple-600",
-        bg: "bg-purple-50"
+        color: "text-teal-600",
+        bg: "bg-teal-50"
     }
   ];
 
@@ -187,10 +189,10 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
               <div className="flex justify-between items-center">
                   <div className="flex space-x-2">
                       {ONBOARDING_SLIDES.map((_, idx) => (
-                          <div key={idx} className={`h-2 rounded-full transition-all duration-300 ${currentSlide === idx ? 'w-8 bg-indigo-600' : 'w-2 bg-gray-200'}`} />
+                          <div key={idx} className={`h-2 rounded-full transition-all duration-300 ${currentSlide === idx ? 'w-8 bg-emerald-600' : 'w-2 bg-gray-200'}`} />
                       ))}
                   </div>
-                  <button onClick={handleNextSlide} className="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center text-white shadow-lg shadow-indigo-200 hover:scale-105 transition-transform">
+                  <button onClick={handleNextSlide} className="w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center text-white shadow-lg shadow-emerald-200 hover:scale-105 transition-transform">
                       <ChevronRight size={24} />
                   </button>
               </div>
@@ -201,27 +203,27 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
   // 2. SPLASH / LANDING
   if (view === 'splash') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-indigo-900 to-indigo-700 flex flex-col items-center justify-center p-8 relative overflow-hidden">
+      <div className="min-h-screen bg-gradient-to-br from-emerald-950 via-emerald-800 to-emerald-500 flex flex-col items-center justify-center p-8 relative overflow-hidden">
          {/* Background Decoration */}
          <div className="absolute top-0 left-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -ml-20 -mt-20"></div>
-         <div className="absolute bottom-0 right-0 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl -mr-20 -mb-20"></div>
+         <div className="absolute bottom-0 right-0 w-80 h-80 bg-emerald-400/10 rounded-full blur-3xl -mr-20 -mb-20"></div>
 
          <div className="relative z-10 flex flex-col items-center w-full max-w-sm">
-            <div className="bg-white/10 p-4 rounded-2xl mb-6 backdrop-blur-sm border border-white/10">
-                <ShieldCheck size={48} className="text-white" />
+            <div className="mb-6">
+                <Logo size={80} theme="dark" />
             </div>
-            <h1 className="text-4xl font-bold text-white mb-2 tracking-tight">Nexus</h1>
-            <p className="text-indigo-200 text-center mb-12">Verified Talent. Trusted Results.</p>
+            <h1 className="text-4xl font-bold text-white mb-2 tracking-tight">Handy</h1>
+            <p className="text-emerald-100 text-center mb-12">Verified Talent. Trusted Results.</p>
 
             <button 
               onClick={() => setView('login')}
-              className="w-full bg-white text-indigo-900 py-4 rounded-xl font-bold mb-4 shadow-lg active:scale-[0.98] transition-transform"
+              className="w-full bg-white text-emerald-900 py-4 rounded-xl font-bold mb-4 shadow-lg active:scale-[0.98] transition-transform"
             >
               Log In
             </button>
             <button 
               onClick={() => setView('role')}
-              className="w-full bg-indigo-600/50 border border-white/20 text-white py-4 rounded-xl font-bold hover:bg-indigo-600/70 active:scale-[0.98] transition-all"
+              className="w-full bg-emerald-700/50 border border-white/20 text-white py-4 rounded-xl font-bold hover:bg-emerald-700/70 active:scale-[0.98] transition-all backdrop-blur-sm"
             >
               Create Account
             </button>
@@ -234,16 +236,16 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
   if (view === 'role') {
     return (
       <div className="min-h-screen bg-gray-50 p-6 flex flex-col">
-        <button onClick={() => setView('splash')} className="self-start p-2 -ml-2 text-gray-400 hover:text-indigo-600"><ArrowLeft /></button>
+        <button onClick={() => setView('splash')} className="self-start p-2 -ml-2 text-gray-400 hover:text-emerald-600"><ArrowLeft /></button>
         
         <h2 className="text-2xl font-bold text-slate-800 mt-6 mb-2">Choose your path</h2>
-        <p className="text-gray-500 mb-8">How do you want to use Nexus?</p>
+        <p className="text-gray-500 mb-8">How do you want to use Handy?</p>
 
         <div className="space-y-4">
            {/* Customer Card */}
            <div 
              onClick={() => handleRoleSelect('customer')}
-             className="bg-white p-6 rounded-2xl border-2 border-transparent hover:border-indigo-600 shadow-sm cursor-pointer transition-all group"
+             className="bg-white p-6 rounded-2xl border-2 border-transparent hover:border-emerald-600 shadow-sm cursor-pointer transition-all group"
             >
               <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center mb-4 group-hover:bg-blue-100">
                   <UserIconSVG className="text-blue-600" size={24} />
@@ -255,10 +257,10 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
            {/* Entrepreneur Card */}
            <div 
              onClick={() => handleRoleSelect('entrepreneur')}
-             className="bg-white p-6 rounded-2xl border-2 border-transparent hover:border-indigo-600 shadow-sm cursor-pointer transition-all group"
+             className="bg-white p-6 rounded-2xl border-2 border-transparent hover:border-emerald-600 shadow-sm cursor-pointer transition-all group"
             >
-              <div className="w-12 h-12 bg-purple-50 rounded-full flex items-center justify-center mb-4 group-hover:bg-purple-100">
-                  <BriefcaseIconSVG className="text-purple-600" size={24} />
+              <div className="w-12 h-12 bg-green-50 rounded-full flex items-center justify-center mb-4 group-hover:bg-green-100">
+                  <BriefcaseIconSVG className="text-emerald-600" size={24} />
               </div>
               <h3 className="font-bold text-lg text-slate-800">I want to work</h3>
               <p className="text-sm text-gray-500 mt-1">Offer services and grow your business.</p>
@@ -280,41 +282,47 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
               </div>
 
               {/* Role Selection */}
-              <div className="flex bg-gray-50 p-1 rounded-xl mb-6 border border-gray-100">
+              <div className="flex bg-gray-50 p-1 rounded-xl mb-6 border border-gray-100 overflow-x-auto">
                 <button 
                     onClick={() => setLoginRole('customer')}
-                    className={`flex-1 py-3 rounded-lg text-sm font-bold transition-all flex items-center justify-center ${loginRole === 'customer' ? 'bg-white text-indigo-600 shadow-sm ring-1 ring-gray-100' : 'text-gray-400 hover:text-gray-600'}`}
+                    className={`flex-1 py-3 px-2 rounded-lg text-xs md:text-sm font-bold transition-all flex items-center justify-center whitespace-nowrap ${loginRole === 'customer' ? 'bg-white text-emerald-600 shadow-sm ring-1 ring-gray-100' : 'text-gray-400 hover:text-gray-600'}`}
                 >
-                    <UserIconSVG size={16} className="mr-2" /> Customer
+                    <UserIconSVG size={16} className="mr-1 md:mr-2" /> Customer
                 </button>
                 <button 
                     onClick={() => setLoginRole('entrepreneur')}
-                    className={`flex-1 py-3 rounded-lg text-sm font-bold transition-all flex items-center justify-center ${loginRole === 'entrepreneur' ? 'bg-white text-purple-600 shadow-sm ring-1 ring-gray-100' : 'text-gray-400 hover:text-gray-600'}`}
+                    className={`flex-1 py-3 px-2 rounded-lg text-xs md:text-sm font-bold transition-all flex items-center justify-center whitespace-nowrap ${loginRole === 'entrepreneur' ? 'bg-white text-emerald-600 shadow-sm ring-1 ring-gray-100' : 'text-gray-400 hover:text-gray-600'}`}
                 >
-                    <BriefcaseIconSVG size={16} className="mr-2" /> Entrepreneur
+                    <BriefcaseIconSVG size={16} className="mr-1 md:mr-2" /> Entrepreneur
+                </button>
+                <button 
+                    onClick={() => setLoginRole('admin')}
+                    className={`flex-1 py-3 px-2 rounded-lg text-xs md:text-sm font-bold transition-all flex items-center justify-center whitespace-nowrap ${loginRole === 'admin' ? 'bg-white text-emerald-600 shadow-sm ring-1 ring-gray-100' : 'text-gray-400 hover:text-gray-600'}`}
+                >
+                    <ShieldCheck size={16} className="mr-1 md:mr-2" /> Admin
                 </button>
               </div>
 
               <div className="space-y-4">
                   <div className="relative">
                       <Mail className="absolute left-4 top-3.5 text-gray-400" size={20} />
-                      <input type="email" placeholder="Email Address" className="w-full pl-12 pr-4 py-3.5 bg-gray-50 rounded-xl border border-gray-100 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition-all" />
+                      <input type="email" placeholder="Email Address" className="w-full pl-12 pr-4 py-3.5 bg-gray-50 rounded-xl border border-gray-100 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none transition-all" />
                   </div>
                   <div className="relative">
                       <Lock className="absolute left-4 top-3.5 text-gray-400" size={20} />
-                      <input type="password" placeholder="Password" className="w-full pl-12 pr-4 py-3.5 bg-gray-50 rounded-xl border border-gray-100 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition-all" />
+                      <input type="password" placeholder="Password" className="w-full pl-12 pr-4 py-3.5 bg-gray-50 rounded-xl border border-gray-100 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none transition-all" />
                   </div>
                   <div className="text-right">
-                      <a href="#" className="text-indigo-600 text-sm font-bold">Forgot Password?</a>
+                      <a href="#" className="text-emerald-600 text-sm font-bold">Forgot Password?</a>
                   </div>
               </div>
 
-              <button onClick={handleLoginSuccess} className={`w-full text-white py-4 rounded-xl font-bold mt-8 shadow-lg transition-colors ${loginRole === 'customer' ? 'bg-indigo-600 shadow-indigo-200 hover:bg-indigo-700' : 'bg-purple-600 shadow-purple-200 hover:bg-purple-700'}`}>
-                  Log In as {loginRole === 'customer' ? 'Customer' : 'Entrepreneur'}
+              <button onClick={handleLoginSuccess} className="w-full text-white py-4 rounded-xl font-bold mt-8 shadow-lg transition-colors bg-emerald-600 shadow-emerald-200 hover:bg-emerald-700 capitalize">
+                  Log In as {loginRole}
               </button>
 
               <p className="text-center mt-6 text-gray-500 text-sm">
-                  Don't have an account? <span onClick={() => setView('role')} className="text-indigo-600 font-bold cursor-pointer">Sign Up</span>
+                  Don't have an account? <span onClick={() => setView('role')} className="text-emerald-600 font-bold cursor-pointer">Sign Up</span>
               </p>
           </div>
       )
@@ -337,7 +345,7 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
                 
                 {/* 1. Identity Verification */}
                 <section className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
-                    <div className="flex items-center space-x-2 mb-4 text-blue-600">
+                    <div className="flex items-center space-x-2 mb-4 text-emerald-600">
                         <UserIconSVG size={20} />
                         <h3 className="font-bold text-sm uppercase tracking-wide">Identity & Profile</h3>
                     </div>
@@ -349,7 +357,7 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
                                 placeholder="As it appears on ID" 
                                 value={formData.name}
                                 onChange={(e) => setFormData({...formData, name: e.target.value})}
-                                className="w-full p-3 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-blue-500" 
+                                className="w-full p-3 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-emerald-500" 
                             />
                         </div>
                         <div className="flex space-x-3">
@@ -363,7 +371,7 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
                                     placeholder="Brief bio or purpose (e.g. Hiring for home renovation)"
                                     value={formData.customerPurpose}
                                     onChange={(e) => setFormData({...formData, customerPurpose: e.target.value})}
-                                    className="w-full h-[88px] p-3 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-blue-500 resize-none"
+                                    className="w-full h-[88px] p-3 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-emerald-500 resize-none"
                                 />
                             </div>
                         </div>
@@ -375,7 +383,7 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
                                     placeholder="john@example.com"
                                     value={formData.email}
                                     onChange={(e) => setFormData({...formData, email: e.target.value})}
-                                    className="w-full p-3 pl-9 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-blue-500"
+                                    className="w-full p-3 pl-9 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-emerald-500"
                                 />
                                 <Mail className="absolute left-3 top-8 text-gray-400" size={16} />
                             </div>
@@ -386,7 +394,7 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
                                     placeholder="+234..."
                                     value={formData.phone}
                                     onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                                    className="w-full p-3 pl-9 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-blue-500"
+                                    className="w-full p-3 pl-9 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-emerald-500"
                                 />
                                 <Smartphone className="absolute left-3 top-8 text-gray-400" size={16} />
                                 <span className="absolute right-3 top-8 text-[10px] text-orange-500 font-bold">Unverified</span>
@@ -397,7 +405,7 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
                             <input 
                                 type="password" 
                                 placeholder="••••••••" 
-                                className="w-full p-3 pl-9 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-blue-500" 
+                                className="w-full p-3 pl-9 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-emerald-500" 
                             />
                             <Lock className="absolute left-3 top-8 text-gray-400" size={16} />
                         </div>
@@ -406,7 +414,7 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
 
                 {/* 2. Location (Geolocation) */}
                 <section className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
-                     <div className="flex items-center space-x-2 mb-4 text-green-600">
+                     <div className="flex items-center space-x-2 mb-4 text-emerald-600">
                         <MapPin size={20} />
                         <h3 className="font-bold text-sm uppercase tracking-wide">Location</h3>
                     </div>
@@ -419,7 +427,7 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
                                     placeholder="Lagos"
                                     value={formData.customerState}
                                     onChange={(e) => setFormData({...formData, customerState: e.target.value})}
-                                    className="w-full p-3 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-green-500"
+                                    className="w-full p-3 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-emerald-500"
                                 />
                             </div>
                              <div>
@@ -429,11 +437,11 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
                                     placeholder="Ikeja"
                                     value={formData.customerCity}
                                     onChange={(e) => setFormData({...formData, customerCity: e.target.value})}
-                                    className="w-full p-3 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-green-500"
+                                    className="w-full p-3 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-emerald-500"
                                 />
                             </div>
                          </div>
-                         <button className="w-full py-2.5 bg-green-50 text-green-700 text-xs font-bold rounded-lg flex items-center justify-center border border-green-100">
+                         <button className="w-full py-2.5 bg-emerald-50 text-emerald-700 text-xs font-bold rounded-lg flex items-center justify-center border border-emerald-100">
                               <Navigation size={14} className="mr-2" /> Use Current Location
                           </button>
                     </div>
@@ -441,7 +449,7 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
 
                 {/* 3. Payment Method */}
                 <section className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
-                     <div className="flex items-center space-x-2 mb-4 text-indigo-600">
+                     <div className="flex items-center space-x-2 mb-4 text-emerald-600">
                         <CreditCard size={20} />
                         <h3 className="font-bold text-sm uppercase tracking-wide">Payment Method</h3>
                     </div>
@@ -459,7 +467,7 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
 
                 {/* 4. Security & Trust (Recovery + Socials) */}
                  <section className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
-                     <div className="flex items-center space-x-2 mb-4 text-orange-500">
+                     <div className="flex items-center space-x-2 mb-4 text-emerald-600">
                         <ShieldCheck size={20} />
                         <h3 className="font-bold text-sm uppercase tracking-wide">Security & Trust</h3>
                     </div>
@@ -472,7 +480,7 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
                                 placeholder="Backup contact for account recovery"
                                 value={formData.recoveryPhone}
                                 onChange={(e) => setFormData({...formData, recoveryPhone: e.target.value})}
-                                className="w-full p-3 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-orange-500"
+                                className="w-full p-3 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-emerald-500"
                             />
                         </div>
                          <div className="grid grid-cols-2 gap-3">
@@ -483,7 +491,7 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
                                     placeholder="Optional"
                                     value={formData.nextOfKinName}
                                     onChange={(e) => setFormData({...formData, nextOfKinName: e.target.value})}
-                                    className="w-full p-3 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-orange-500"
+                                    className="w-full p-3 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-emerald-500"
                                 />
                             </div>
                              <div>
@@ -493,7 +501,7 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
                                     placeholder="Optional"
                                     value={formData.nextOfKinPhone}
                                     onChange={(e) => setFormData({...formData, nextOfKinPhone: e.target.value})}
-                                    className="w-full p-3 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-orange-500"
+                                    className="w-full p-3 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-emerald-500"
                                 />
                             </div>
                          </div>
@@ -519,11 +527,11 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
                 {/* 5. Optional High Trust Verification */}
                  <section className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 relative overflow-hidden">
                     <div className="absolute top-0 right-0 bg-yellow-400 text-yellow-900 text-[10px] font-bold px-2 py-1 rounded-bl-lg z-10">HIGH TRUST</div>
-                     <div className="flex items-center space-x-2 mb-4 text-purple-600">
+                     <div className="flex items-center space-x-2 mb-4 text-emerald-600">
                         <Eye size={20} />
                         <h3 className="font-bold text-sm uppercase tracking-wide">Enhanced Verification (Optional)</h3>
                     </div>
-                    <p className="text-xs text-gray-500 mb-4">Upload ID and verify face to get the <span className="font-bold text-purple-600">"Trusted Customer"</span> badge.</p>
+                    <p className="text-xs text-gray-500 mb-4">Upload ID and verify face to get the <span className="font-bold text-emerald-600">"Trusted Customer"</span> badge.</p>
                     
                     <div className="grid grid-cols-2 gap-3">
                          <div className="p-3 bg-gray-50 border border-gray-200 border-dashed rounded-xl flex flex-col items-center justify-center text-gray-400 py-6">
@@ -538,24 +546,24 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
                 </section>
 
                 {/* 6. Legal Agreements */}
-                <section className="bg-indigo-50 p-5 rounded-2xl border border-indigo-100">
-                    <h3 className="font-bold text-sm text-indigo-900 mb-3">Community Agreements</h3>
+                <section className="bg-emerald-50 p-5 rounded-2xl border border-emerald-100">
+                    <h3 className="font-bold text-sm text-emerald-900 mb-3">Community Agreements</h3>
                     <div className="space-y-3">
                         <label className="flex items-start space-x-3">
-                            <input checked={formData.agreements.chargeback} onChange={() => handleCustomerAgreementChange('chargeback')} type="checkbox" className="mt-1 w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500" />
-                            <span className="text-xs text-indigo-800">I agree to the <b>No-Chargeback Policy</b> for completed services.</span>
+                            <input checked={formData.agreements.chargeback} onChange={() => handleCustomerAgreementChange('chargeback')} type="checkbox" className="mt-1 w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500" />
+                            <span className="text-xs text-emerald-800">I agree to the <b>No-Chargeback Policy</b> for completed services.</span>
                         </label>
                         <label className="flex items-start space-x-3">
-                            <input checked={formData.agreements.fraud} onChange={() => handleCustomerAgreementChange('fraud')} type="checkbox" className="mt-1 w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500" />
-                            <span className="text-xs text-indigo-800">I agree to the <b>Anti-Fraud Policy</b>. I understand my account will be banned for suspicious activity.</span>
+                            <input checked={formData.agreements.fraud} onChange={() => handleCustomerAgreementChange('fraud')} type="checkbox" className="mt-1 w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500" />
+                            <span className="text-xs text-emerald-800">I agree to the <b>Anti-Fraud Policy</b>. I understand my account will be banned for suspicious activity.</span>
                         </label>
                          <label className="flex items-start space-x-3">
-                            <input checked={formData.agreements.guidelines} onChange={() => handleCustomerAgreementChange('guidelines')} type="checkbox" className="mt-1 w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500" />
-                            <span className="text-xs text-indigo-800">I accept the Community Guidelines & Terms of Service.</span>
+                            <input checked={formData.agreements.guidelines} onChange={() => handleCustomerAgreementChange('guidelines')} type="checkbox" className="mt-1 w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500" />
+                            <span className="text-xs text-emerald-800">I accept the Community Guidelines & Terms of Service.</span>
                         </label>
                          <label className="flex items-start space-x-3">
-                            <input checked={formData.agreements.disputes} onChange={() => handleCustomerAgreementChange('disputes')} type="checkbox" className="mt-1 w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500" />
-                            <span className="text-xs text-indigo-800">I understand the Refund & Dispute resolution rules.</span>
+                            <input checked={formData.agreements.disputes} onChange={() => handleCustomerAgreementChange('disputes')} type="checkbox" className="mt-1 w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500" />
+                            <span className="text-xs text-emerald-800">I understand the Refund & Dispute resolution rules.</span>
                         </label>
                     </div>
                 </section>
@@ -570,7 +578,7 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
                           !formData.agreements.chargeback || !formData.agreements.fraud || 
                           !formData.agreements.guidelines || !formData.agreements.disputes
                       }
-                      className="w-full bg-indigo-600 text-white py-4 rounded-xl font-bold shadow-lg shadow-indigo-200 disabled:bg-gray-300 disabled:shadow-none transition-all flex items-center justify-center"
+                      className="w-full bg-emerald-600 text-white py-4 rounded-xl font-bold shadow-lg shadow-emerald-200 disabled:bg-gray-300 disabled:shadow-none transition-all flex items-center justify-center"
                   >
                       Verify & Create Account <ChevronRight className="ml-2" size={18} />
                   </button>
@@ -596,7 +604,7 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
                   
                   {/* SECTION 1: IDENTITY & CONTACT */}
                   <section className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
-                      <div className="flex items-center space-x-2 mb-4 text-indigo-600">
+                      <div className="flex items-center space-x-2 mb-4 text-emerald-600">
                           <UserIconSVG size={20} />
                           <h3 className="font-bold text-sm uppercase tracking-wide">Identity & Contact</h3>
                       </div>
@@ -609,7 +617,7 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
                                 placeholder="Must match your Gov ID"
                                 value={formData.name}
                                 onChange={(e) => setFormData({...formData, name: e.target.value})}
-                                className="w-full p-3 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-indigo-500"
+                                className="w-full p-3 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-emerald-500"
                             />
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -621,7 +629,7 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
                                         placeholder="name@email.com"
                                         value={formData.email}
                                         onChange={(e) => setFormData({...formData, email: e.target.value})}
-                                        className="w-full p-3 pl-9 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-indigo-500"
+                                        className="w-full p-3 pl-9 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-emerald-500"
                                     />
                                     <Mail className="absolute left-3 top-3 text-gray-400" size={16} />
                                 </div>
@@ -634,7 +642,7 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
                                         placeholder="+234..."
                                         value={formData.phone}
                                         onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                                        className="w-full p-3 pl-9 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-indigo-500"
+                                        className="w-full p-3 pl-9 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-emerald-500"
                                     />
                                     <Smartphone className="absolute left-3 top-3 text-gray-400" size={16} />
                                     <button className="absolute right-2 top-2 text-[10px] bg-green-100 text-green-700 px-2 py-1 rounded font-bold">Verify</button>
@@ -646,7 +654,7 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
 
                   {/* SECTION 2: PROFESSIONAL PROFILE */}
                   <section className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
-                      <div className="flex items-center space-x-2 mb-4 text-purple-600">
+                      <div className="flex items-center space-x-2 mb-4 text-emerald-600">
                           <BriefcaseIconSVG size={20} />
                           <h3 className="font-bold text-sm uppercase tracking-wide">Professional Profile</h3>
                       </div>
@@ -674,7 +682,7 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
                           <div>
                               <label className="text-xs font-bold text-gray-500 mb-1 block">Skill Category</label>
                               <select 
-                                className="w-full p-3 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-purple-500 text-slate-700"
+                                className="w-full p-3 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-emerald-500 text-slate-700"
                                 value={formData.skills}
                                 onChange={(e) => setFormData({...formData, skills: e.target.value})}
                               >
@@ -695,7 +703,7 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
                                   <button 
                                     onClick={handleGenerateBio} 
                                     disabled={!formData.skills || isLoading}
-                                    className="text-[10px] flex items-center text-purple-600 font-bold disabled:opacity-50"
+                                    className="text-[10px] flex items-center text-emerald-600 font-bold disabled:opacity-50"
                                   >
                                       {isLoading ? <Loader2 size={10} className="animate-spin mr-1"/> : <Sparkles size={10} className="mr-1" />}
                                       AI Generate
@@ -706,7 +714,7 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
                                   placeholder="Describe your services..."
                                   value={formData.bio}
                                   onChange={(e) => setFormData({...formData, bio: e.target.value})}
-                                  className="w-full p-3 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-purple-500"
+                                  className="w-full p-3 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-emerald-500"
                               />
                           </div>
 
@@ -719,7 +727,7 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
                                       placeholder="5000"
                                       value={formData.hourlyRate}
                                       onChange={(e) => setFormData({...formData, hourlyRate: e.target.value})}
-                                      className="w-full p-3 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-purple-500"
+                                      className="w-full p-3 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-emerald-500"
                                   />
                               </div>
                               <div>
@@ -735,7 +743,7 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
 
                    {/* SECTION 3: LOCATION */}
                    <section className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
-                      <div className="flex items-center space-x-2 mb-4 text-orange-600">
+                      <div className="flex items-center space-x-2 mb-4 text-emerald-600">
                           <MapPin size={20} />
                           <h3 className="font-bold text-sm uppercase tracking-wide">Business Address</h3>
                       </div>
@@ -745,9 +753,9 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
                               placeholder="Street Address, City, State"
                               value={formData.address}
                               onChange={(e) => setFormData({...formData, address: e.target.value})}
-                              className="w-full p-3 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-orange-500"
+                              className="w-full p-3 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-emerald-500"
                           />
-                          <button className="w-full py-2 bg-orange-50 text-orange-600 text-xs font-bold rounded-lg flex items-center justify-center">
+                          <button className="w-full py-2 bg-emerald-50 text-emerald-600 text-xs font-bold rounded-lg flex items-center justify-center">
                               <MapPin size={14} className="mr-2" /> Pin Location on Map (Geolocation)
                           </button>
                       </div>
@@ -755,7 +763,7 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
 
                   {/* SECTION 4: DOCUMENT VERIFICATION */}
                   <section className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
-                      <div className="flex items-center space-x-2 mb-4 text-blue-600">
+                      <div className="flex items-center space-x-2 mb-4 text-emerald-600">
                           <ShieldCheck size={20} />
                           <h3 className="font-bold text-sm uppercase tracking-wide">Verification Docs</h3>
                       </div>
@@ -764,7 +772,7 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
                           <div>
                               <label className="text-xs font-bold text-gray-500 mb-1 block">Government ID Type</label>
                               <select 
-                                className="w-full p-3 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-blue-500 mb-2"
+                                className="w-full p-3 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-emerald-500 mb-2"
                                 value={formData.govIdType}
                                 onChange={(e) => setFormData({...formData, govIdType: e.target.value})}
                               >
@@ -781,7 +789,7 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
 
                           <div>
                               <label className="text-xs font-bold text-gray-500 mb-1 block">Live Selfie / Face Match</label>
-                              <button className="w-full py-3 bg-blue-50 text-blue-600 rounded-xl font-bold text-sm flex items-center justify-center border border-blue-100">
+                              <button className="w-full py-3 bg-emerald-50 text-emerald-600 rounded-xl font-bold text-sm flex items-center justify-center border border-emerald-100">
                                   <Eye size={16} className="mr-2" /> Start Face Verification
                               </button>
                           </div>
@@ -790,7 +798,7 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
 
                   {/* SECTION 5: FINANCIALS */}
                   <section className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
-                      <div className="flex items-center space-x-2 mb-4 text-green-600">
+                      <div className="flex items-center space-x-2 mb-4 text-emerald-600">
                           <CreditCard size={20} />
                           <h3 className="font-bold text-sm uppercase tracking-wide">Bank Details</h3>
                       </div>
@@ -800,20 +808,20 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
                               placeholder="Bank Name"
                               value={formData.bankName}
                               onChange={(e) => setFormData({...formData, bankName: e.target.value})}
-                              className="w-full p-3 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-green-500"
+                              className="w-full p-3 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-emerald-500"
                           />
                           <div className="flex space-x-3">
                               <input 
                                   type="text" 
                                   placeholder="Account Number"
-                                  className="flex-1 p-3 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-green-500"
+                                  className="flex-1 p-3 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-emerald-500"
                                   value={formData.bankAccount}
                                   onChange={(e) => setFormData({...formData, bankAccount: e.target.value})}
                               />
                               <input 
                                   type="text" 
                                   placeholder="BVN (Hidden)"
-                                  className="flex-1 p-3 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-green-500"
+                                  className="flex-1 p-3 bg-gray-50 rounded-xl text-sm border-none focus:ring-2 focus:ring-emerald-500"
                                   value={formData.bvn}
                                   onChange={(e) => setFormData({...formData, bvn: e.target.value})}
                               />
@@ -847,15 +855,15 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
                   </section>
 
                   {/* AGREEMENT */}
-                  <div className="p-4 bg-indigo-50 rounded-2xl border border-indigo-100">
+                  <div className="p-4 bg-emerald-50 rounded-2xl border border-emerald-100">
                       <label className="flex items-start space-x-3">
                           <input 
                             type="checkbox" 
-                            className="mt-1 w-5 h-5 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                            className="mt-1 w-5 h-5 rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
                             checked={formData.termsAccepted}
                             onChange={(e) => setFormData({...formData, termsAccepted: e.target.checked})}
                           />
-                          <span className="text-xs text-indigo-900">
+                          <span className="text-xs text-emerald-900">
                               I agree to the <b className="cursor-pointer underline">Anti-Fraud Terms</b>. I confirm that all provided information is accurate and matches my legal documents. False information will lead to a permanent ban.
                           </span>
                       </label>
@@ -868,7 +876,7 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
                   <button 
                       onClick={() => setView('otp')} // Go to OTP after full form
                       disabled={!formData.termsAccepted || !formData.name || !formData.phone}
-                      className="w-full bg-indigo-600 text-white py-4 rounded-xl font-bold shadow-lg shadow-indigo-200 disabled:bg-gray-300 disabled:shadow-none transition-all"
+                      className="w-full bg-emerald-600 text-white py-4 rounded-xl font-bold shadow-lg shadow-emerald-200 disabled:bg-gray-300 disabled:shadow-none transition-all"
                   >
                       Submit for Verification
                   </button>
@@ -901,14 +909,14 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
                         maxLength={1}
                         value={digit}
                         onChange={(e) => handleOtpChange(idx, e.target.value)}
-                        className="w-12 h-14 bg-gray-50 border border-gray-200 rounded-xl text-center text-2xl font-bold text-indigo-600 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition-all"
+                        className="w-12 h-14 bg-gray-50 border border-gray-200 rounded-xl text-center text-2xl font-bold text-emerald-600 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none transition-all"
                     />
                 ))}
             </div>
 
             <button 
                 onClick={finalizeSignup}
-                className="w-full max-w-xs bg-indigo-600 text-white py-4 rounded-xl font-bold shadow-lg shadow-indigo-200"
+                className="w-full max-w-xs bg-emerald-600 text-white py-4 rounded-xl font-bold shadow-lg shadow-emerald-200"
             >
                 Verify & Create Account
             </button>
@@ -917,22 +925,54 @@ export const Auth: React.FC<{ setRole: (role: any) => void }> = ({ setRole }) =>
     );
   }
 
-  // 8. WELCOME SUCCESS
+  // 8. WELCOME SUCCESS (UPDATED DESIGN)
   if (view === 'welcome') {
       return (
-          <div className="min-h-screen bg-white flex flex-col items-center justify-center p-8 text-center">
-              <div className="w-24 h-24 bg-green-500 rounded-full flex items-center justify-center mb-6 shadow-xl shadow-green-200 animate-bounce">
-                  <CheckCircle size={48} className="text-white" />
+          <div className="min-h-screen bg-gradient-to-br from-emerald-950 via-emerald-900 to-emerald-800 flex flex-col items-center justify-center p-8 text-center relative overflow-hidden">
+              {/* Animated Background Particles */}
+              <div className="absolute inset-0 overflow-hidden">
+                  <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-emerald-400 rounded-full animate-ping"></div>
+                  <div className="absolute top-3/4 right-1/4 w-3 h-3 bg-emerald-500 rounded-full animate-ping delay-700"></div>
+                  <div className="absolute bottom-10 left-1/2 w-2 h-2 bg-white rounded-full animate-pulse delay-500"></div>
               </div>
-              <h1 className="text-3xl font-bold text-slate-900 mb-2">You're In!</h1>
-              <p className="text-gray-500 max-w-xs mx-auto">
-                  {targetRole === 'entrepreneur' 
-                    ? "Your verification is pending. You can now explore the dashboard."
-                    : "Account verified & created successfully. Your Trust Score: 85"}
-              </p>
-              <div className="mt-8 flex items-center space-x-2 text-indigo-600 font-bold">
-                  <Loader2 className="animate-spin" />
-                  <span>Redirecting...</span>
+
+              <div className="relative z-10 flex flex-col items-center animate-in fade-in zoom-in duration-700">
+                  {/* Custom Handshake H Logo */}
+                  <div className="w-48 h-48 mb-6 relative">
+                      {/* Structure: Two Pillars + Handshake Icon Crossbar */}
+                      <div className="w-full h-full flex items-center justify-between px-8 relative">
+                           {/* Left Pillar */}
+                           <div className="w-5 h-full bg-white rounded-full shadow-[0_0_20px_rgba(255,255,255,0.3)] animate-[pulse_3s_ease-in-out_infinite]"></div>
+                           
+                           {/* Connecting Arm Left */}
+                           <div className="absolute left-1/2 top-1/2 -translate-x-full h-3 w-12 bg-white/80 rounded-l-full -ml-3"></div>
+
+                           {/* Handshake Center Icon */}
+                           <div className="z-10 relative">
+                                {/* The Nokia-inspired Connection Spark/Glow */}
+                                <div className="absolute inset-0 bg-blue-400 rounded-full blur-xl opacity-40 animate-pulse scale-150"></div>
+                                <div className="relative bg-emerald-800 p-4 rounded-full border-4 border-white animate-handshake shadow-2xl">
+                                     <Handshake size={48} className="text-white drop-shadow-md" strokeWidth={2.5} />
+                                </div>
+                           </div>
+
+                           {/* Connecting Arm Right */}
+                           <div className="absolute right-1/2 top-1/2 translate-x-full h-3 w-12 bg-white/80 rounded-r-full -mr-3"></div>
+
+                           {/* Right Pillar */}
+                           <div className="w-5 h-full bg-white rounded-full shadow-[0_0_20px_rgba(255,255,255,0.3)] animate-[pulse_3s_ease-in-out_infinite] delay-150"></div>
+                      </div>
+                  </div>
+
+                  <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">Handy</h1>
+                  <p className="text-xl text-emerald-100 font-medium mb-2">Verified Talent. Trusted Results.</p>
+                  <p className="text-emerald-300/80 text-sm animate-pulse">Connecting...</p>
+                  
+                  <div className="mt-12 flex flex-col items-center space-y-3">
+                     <div className="h-1.5 w-48 bg-emerald-900/50 rounded-full overflow-hidden backdrop-blur-sm border border-emerald-500/20">
+                         <div className="h-full bg-emerald-400 animate-[loading_1.5s_ease-in-out_infinite]" style={{width: '60%'}}></div>
+                     </div>
+                  </div>
               </div>
           </div>
       )

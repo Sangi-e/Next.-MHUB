@@ -1,7 +1,9 @@
+
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Home, Search, Calendar, MessageSquare, User, ShieldCheck, Wallet, Trophy, Briefcase } from 'lucide-react';
 import { UserRole } from '../types';
+import { Logo } from './Logo';
 
 interface BottomNavProps {
   role: UserRole;
@@ -9,7 +11,7 @@ interface BottomNavProps {
 
 export const MobileContainer: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => {
   return (
-    <div className={`min-h-screen bg-gray-50 pb-20 md:pb-0 md:pl-64 ${className}`}>
+    <div className={`min-h-screen bg-gray-50 pb-20 md:pb-0 md:pl-64 transition-colors duration-200 ${className}`}>
       {children}
     </div>
   );
@@ -34,11 +36,9 @@ export const DesktopSidebar: React.FC<{ role: UserRole }> = ({ role }) => {
 
   return (
     <div className="hidden md:flex flex-col w-64 bg-white border-r border-gray-200 h-screen fixed left-0 top-0 z-50">
-      <div className="p-6 flex items-center space-x-2">
-        <div className="bg-indigo-600 p-1.5 rounded-lg">
-           <ShieldCheck className="text-white" size={20} />
-        </div>
-        <h1 className="text-2xl font-bold text-slate-800">Nexus</h1>
+      <div className="p-6 flex items-center space-x-3">
+        <Logo size={36} theme="light" />
+        <h1 className="text-2xl font-bold text-slate-800 tracking-tight">Handy</h1>
       </div>
       <div className="flex-1 px-4">
         {role === 'admin' ? (
@@ -75,7 +75,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({ role }) => {
     return (
       <button 
         onClick={() => navigate(to)}
-        className={`flex flex-col items-center justify-center w-full h-full space-y-1 ${isActive ? 'text-indigo-600' : 'text-gray-400 hover:text-gray-600 transition-colors'}`}
+        className={`flex flex-col items-center justify-center w-full h-full space-y-1 transition-colors ${isActive ? 'text-indigo-600' : 'text-gray-400 hover:text-gray-600'}`}
       >
         <Icon size={24} strokeWidth={isActive ? 2.5 : 2} />
         <span className="text-[10px] font-medium">{label}</span>

@@ -1,6 +1,6 @@
 {
-  "name": "Nexus",
-  "description": "A high-fidelity prototype for a hyperlocal and global services marketplace connecting customers with verified entrepreneurs.",
+  "name": "Handy",
+  "description": "A high-fidelity prototype for a hyperlocal and global services marketplace connecting customers with verified experts.",
   "requestFramePermissions": [
     "camera",
     "microphone",

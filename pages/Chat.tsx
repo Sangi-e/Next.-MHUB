@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Send, Paperclip, Mic, Image as ImageIcon, CreditCard, Shield, Lock, Search, ArrowLeft, Calendar, MessageSquare } from 'lucide-react';
 import { Conversation, Message } from '../types';
@@ -8,7 +9,7 @@ const MOCK_CONVERSATIONS: Conversation[] = [
         id: 'c1',
         participantId: 'p1',
         participantName: 'Adeola Johnson',
-        participantAvatar: 'https://picsum.photos/100/100?random=1',
+        participantAvatar: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=150&q=80',
         lastMessage: 'I have started working on your logo concepts!',
         lastMessageTime: new Date(Date.now() - 1000 * 60 * 10), // 10 mins ago
         unreadCount: 2,
@@ -18,7 +19,7 @@ const MOCK_CONVERSATIONS: Conversation[] = [
         id: 'c2',
         participantId: 'p3',
         participantName: 'Musa Auto',
-        participantAvatar: 'https://picsum.photos/100/100?random=3',
+        participantAvatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80',
         lastMessage: 'The website is ready for review.',
         lastMessageTime: new Date(Date.now() - 1000 * 60 * 60 * 24 * 2), // 2 days ago
         unreadCount: 0,

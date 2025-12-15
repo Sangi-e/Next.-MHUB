@@ -1,3 +1,4 @@
+
 export type UserRole = 'customer' | 'entrepreneur' | 'admin';
 
 export type BadgeType = 
@@ -8,9 +9,27 @@ export type BadgeType =
   | 'High Performer' 
   | 'New Star' 
   | 'Premium' 
-  | 'Global Seller';
+  | 'Global Seller'
+  | 'High Earner'     // New
+  | 'Fast Growth'     // New
+  | 'Top Seller'      // New
+  | 'Repeat Magnet';  // New
 
 export type LevelType = 'Starter' | 'Bronze' | 'Silver' | 'Gold' | 'Platinum' | 'Elite' | 'Grandmaster';
+
+export interface LevelRequirements {
+  xp: number;
+  earnings: number;
+  jobs: number;
+  rating: number;
+}
+
+export interface LevelConfig {
+  name: LevelType;
+  color: string;
+  perks: string[];
+  requirements: LevelRequirements;
+}
 
 export interface GamificationStats {
   xp: number;
@@ -25,7 +44,11 @@ export interface GamificationStats {
     local: number;
     category: number;
   };
-  monthlyAwards?: string[]; // e.g. "Entrepreneur of the Month - Oct"
+  monthlyAwards?: string[];
+  // New tracking for leveling
+  totalEarnings: number;
+  lifetimeJobs: number;
+  currentRating: number;
 }
 
 export interface User {
@@ -51,6 +74,7 @@ export interface User {
     hoursResponse?: number;
     rating?: number;
     completionRate?: number; // 0-100
+    responseRate?: number; // 0-100
   };
   gamification?: GamificationStats;
   settings?: {
@@ -77,10 +101,17 @@ export interface Service {
   isOnline: boolean;
   distance?: string;
   hourlyRate?: number;
-  // Gamification props for search boosting
   gamificationScore?: number;
   badges?: BadgeType[];
   level?: LevelType;
+  // New Discovery Fields
+  portfolio?: string[]; // For Pinterest Grid
+  videoPreview?: string; // For TikTok Feed (Mocked)
+  activity?: {
+    viewsThisWeek: number;
+    bookingsToday: number;
+    lastActive: string;
+  };
 }
 
 export interface Message {
@@ -89,7 +120,7 @@ export interface Message {
   text: string;
   timestamp: Date;
   type: 'text' | 'image' | 'file' | 'audio' | 'system';
-  previewUrl?: string; // For work previews
+  previewUrl?: string; 
   isWatermarked?: boolean;
   isRead?: boolean;
 }
@@ -105,6 +136,13 @@ export interface Conversation {
   isOnline: boolean;
 }
 
+export interface TimelineStep {
+  title: string;
+  date?: string;
+  status: 'completed' | 'current' | 'pending';
+  icon?: any;
+}
+
 export interface Booking {
   id: string;
   serviceId: string;
@@ -116,6 +154,10 @@ export interface Booking {
   time: string;
   status: 'pending' | 'confirmed' | 'in-progress' | 'completed' | 'cancelled' | 'disputed';
   amount: number;
+  paymentStatus?: 'paid' | 'escrow' | 'pending';
+  location?: string;
+  timeline?: TimelineStep[];
+  hasReview?: boolean;
 }
 
 export interface WalletTransaction {

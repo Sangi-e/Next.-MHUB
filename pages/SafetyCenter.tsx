@@ -32,7 +32,7 @@ export const SafetyCenter: React.FC = () => {
                 </div>
                 <h2 className="text-2xl font-bold mb-2">Your Safety is Our Priority</h2>
                 <p className="text-indigo-100 text-sm leading-relaxed max-w-xs">
-                    Nexus is designed with built-in protections to help you stay safe while hiring or working.
+                    Handy is designed with built-in protections to help you stay safe while hiring or working.
                 </p>
             </div>
         </div>
@@ -67,11 +67,11 @@ export const SafetyCenter: React.FC = () => {
                         <h4 className="font-bold text-slate-800 text-sm">Safe Payments</h4>
                     </div>
                     <p className="text-xs text-gray-500 mb-4 leading-relaxed">
-                        Never pay outside the Nexus app. Our Escrow system protects your funds until the job is completed to your satisfaction.
+                        Never pay outside the Handy app. Our Escrow system protects your funds until the job is completed to your satisfaction.
                     </p>
                     <div className="bg-green-50 rounded-xl p-3 flex items-start space-x-3">
                          <ShieldCheck size={16} className="text-green-600 mt-0.5 flex-shrink-0" />
-                         <span className="text-xs text-green-800 font-medium">Always use Nexus Escrow for transactions to ensure you are covered by our Money Back Guarantee.</span>
+                         <span className="text-xs text-green-800 font-medium">Always use Handy Escrow for transactions to ensure you are covered by our Money Back Guarantee.</span>
                     </div>
                 </div>
 
@@ -119,7 +119,7 @@ export const SafetyCenter: React.FC = () => {
                         <h4 className="font-bold text-slate-800 text-sm">Chat Smart</h4>
                     </div>
                     <p className="text-xs text-gray-500 mb-3 leading-relaxed">
-                        Keep all communication inside the Nexus app. This serves as evidence in case of disputes and protects your personal contact info.
+                        Keep all communication inside the Handy app. This serves as evidence in case of disputes and protects your personal contact info.
                     </p>
                     <div className="bg-red-50 border border-red-100 rounded-xl p-3 flex items-start space-x-3">
                          <Eye size={16} className="text-red-500 mt-0.5 flex-shrink-0" />

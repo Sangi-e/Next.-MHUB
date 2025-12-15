@@ -1,3 +1,5 @@
+
+
 import React, { useState, useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { MobileContainer, BottomNav, DesktopSidebar } from './components/Layout';
@@ -6,6 +8,7 @@ import { Home } from './pages/Home';
 import { Chat } from './pages/Chat';
 import { Wallet } from './pages/Wallet';
 import { Bookings } from './pages/Bookings';
+import { BookingDetails } from './pages/BookingDetails';
 import { Profile } from './pages/Profile';
 import { EditProfile } from './pages/EditProfile';
 import { Leaderboard } from './pages/Leaderboard';
@@ -26,13 +29,20 @@ import { UserRole, User } from './types';
 const App: React.FC = () => {
   const [role, setRole] = useState<UserRole | null>(null);
   
+  // Enforce Light Mode
+  useEffect(() => {
+    document.documentElement.classList.remove('dark');
+    localStorage.setItem('theme', 'light');
+  }, []);
+
   // Default mock user
   const [user, setUser] = useState<User>({
     id: '1',
     name: 'Emmanuel Doe',
     email: 'emmanuel.doe@example.com',
     role: 'entrepreneur',
-    avatar: 'https://picsum.photos/150/150?random=88',
+    // Emmanuel Doe
+    avatar: 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&w=150&q=80',
     verified: true,
     walletBalance: 85000,
     location: 'Yaba, Lagos',
@@ -70,7 +80,7 @@ const App: React.FC = () => {
             name: 'Emmanuel Doe',
             email: 'emmanuel.doe@example.com',
             role: 'entrepreneur',
-            avatar: 'https://picsum.photos/150/150?random=88',
+            avatar: 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&w=150&q=80',
             verified: true,
             walletBalance: 85000,
             location: 'Yaba, Lagos',
@@ -111,6 +121,7 @@ const App: React.FC = () => {
                   <Route path="/leaderboard" element={<MobileContainer><Leaderboard /></MobileContainer>} />
                   <Route path="/wallet" element={<MobileContainer><Wallet role={role} /></MobileContainer>} />
                   <Route path="/bookings" element={<MobileContainer><Bookings role={role} /></MobileContainer>} />
+                  <Route path="/booking/:id" element={<MobileContainer><BookingDetails role={role} /></MobileContainer>} />
                   <Route path="/chat" element={<MobileContainer><Chat /></MobileContainer>} />
                   <Route path="/profile" element={<MobileContainer><Profile user={user} onLogout={handleLogout} /></MobileContainer>} />
                   <Route path="/edit-profile" element={<MobileContainer><EditProfile user={user} onUpdateUser={handleUpdateUser} /></MobileContainer>} />

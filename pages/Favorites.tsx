@@ -21,7 +21,7 @@ const MOCK_FAVORITES: FavoriteItem[] = [
   {
     id: '1',
     providerName: 'Sarah Tech',
-    providerAvatar: 'https://picsum.photos/100/100?random=2',
+    providerAvatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80',
     title: 'Modern Logo Design & Branding',
     category: 'Digital Services',
     price: 15000,
@@ -34,7 +34,7 @@ const MOCK_FAVORITES: FavoriteItem[] = [
   {
     id: '3',
     providerName: 'Musa Auto',
-    providerAvatar: 'https://picsum.photos/100/100?random=3',
+    providerAvatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80',
     title: 'Mobile Mechanic - Brake Specialist',
     category: 'Mechanics',
     price: 8000,
